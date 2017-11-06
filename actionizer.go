@@ -25,7 +25,8 @@ func init() {
 }
 
 func main() {
-	configFile := flag.String("config", "config/config.json", "Configuration file")
+	configFile := flag.String("config", "actionizer.json", "Configuration file")
+	flag.Parse()
 
 	// parse and load json config
 	var config configuration
