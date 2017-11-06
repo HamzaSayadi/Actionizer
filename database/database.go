@@ -33,18 +33,17 @@ func Connect(config Config) (*Database, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	db := session.DB(config.Name)
+
 	// If User is not empty we do an auth
 	if config.User != "" {
-		cred := mgo.Credential{
-			Username: config.User,
-			Password: config.Password,
-		}
-		err := session.Login(&cred)
+		err := db.Login(config.User, config.Password)
 		if err != nil {
 			return nil, err
 		}
 	}
-	return &Database{session.DB(config.Name)}, nil
+	return &Database{db}, nil
 }
 
 func (db *Database) ucol() *mgo.Collection {
