@@ -1,0 +1,11 @@
+{
+	"database": {
+		"host": "localhost",
+		"name": "actionizer",
+		"user": "",
+		"password": ""
+	},
+	"http_listen": "127.0.0.1",
+	"http_port": 8080,
+	"action_duration": "2w"
+}
