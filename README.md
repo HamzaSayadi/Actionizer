@@ -18,12 +18,12 @@
 
 ## Installation
 
-Before installing `actionizer` you need to have mongodb installed alongside with it's golang driver:
+Before installing `actionizer` you need to have mongodb installed alongside with its golang driver:
 ```shell
 go get gopkg.in/mgo.v2
 ```
 
-Once done install the `actionizer` by running:
+Once done install `actionizer` by running:
 ```shell
 go install github.com/think-it-labs/actionizer
 ```
@@ -37,7 +37,7 @@ Usage of actionizer:
         Configuration file (default "actionizer.json")
 ```
 
-Actionzer read it's configuration from a json file that has this format
+Actionzer read its configuration from a json file (`actionizer.json` by default) that has this format
 
 ```json
 {
@@ -57,7 +57,7 @@ The value of `action_duration` field should be in form `{AMOUT}{UNIT}`
 
 Unit can be: `s (seconds)`, `m (minutes)`, `h (hours)`, `d (days)` or `w (weeks)`.
 
-### Config Example
+### Config file Example
 
 `database.user` and `database.password` can contains database user credentials if needed.
 
