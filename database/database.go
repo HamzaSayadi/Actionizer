@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/syd7/actionizer/models"
-	"github.com/think-it-labs/actionizer/utils"
+	"github.com/syd7/actionizer/utils"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

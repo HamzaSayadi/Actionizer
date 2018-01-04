@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
 	"math/rand"
@@ -32,17 +31,18 @@ func main() {
 	var opts models.Options
 	_, erro := flags.Parse(&opts)
 	fmt.Println(opts)
-	return
+
 	if erro != nil {
 		panic(erro)
 	}
 
-	configFile := flag.String("config", "actionizer.json", "Configuration file")
-	flag.Parse()
-
+	configFile := opts.Config
+	if configFile == "" {
+		configFile = "actionizer.json"
+	}
 	// parse and load json config
 	var config configuration
-	err := jsonconfig.Load(*configFile, &config)
+	err := jsonconfig.Load(configFile, &config)
 	if err != nil {
 		log.Fatalf("Failed to parse config file: %v\n", err)
 	}
@@ -52,6 +52,7 @@ func main() {
 		log.Fatalf("Cannot connect to database server: %v\n", err)
 	}
 
+	fmt.Println(opts.GetUsers)
 	if opts.GetActions {
 		cli.ShowActions(db)
 		return
@@ -75,7 +76,7 @@ func main() {
 		cli.DeleteAction(db, opts.ActionDesc)
 	}
 
-	// Choose an action if there none
+	//Choose an action if there none
 	_, err = db.CurrentTask()
 	if err != nil {
 		log.Printf("No task found, creating new one\n")
