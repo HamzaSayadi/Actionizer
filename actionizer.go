@@ -2,15 +2,18 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"math/rand"
 	"time"
 
-	"github.com/think-it-labs/actionizer/database"
-	"github.com/think-it-labs/actionizer/server"
-	"github.com/think-it-labs/actionizer/utils"
-
+	flags "github.com/jessevdk/go-flags"
 	"github.com/knadh/jsonconfig"
+	"github.com/syd7/actionizer/cli"
+	"github.com/syd7/actionizer/database"
+	"github.com/syd7/actionizer/models"
+	"github.com/syd7/actionizer/server"
+	"github.com/syd7/actionizer/utils"
 )
 
 type configuration struct {
@@ -25,6 +28,15 @@ func init() {
 }
 
 func main() {
+	//parse cli options
+	var opts models.Options
+	_, erro := flags.Parse(&opts)
+	fmt.Println(opts)
+	return
+	if erro != nil {
+		panic(erro)
+	}
+
 	configFile := flag.String("config", "actionizer.json", "Configuration file")
 	flag.Parse()
 
@@ -38,6 +50,29 @@ func main() {
 	db, err := database.Connect(config.Database)
 	if err != nil {
 		log.Fatalf("Cannot connect to database server: %v\n", err)
+	}
+
+	if opts.GetActions {
+		cli.ShowActions(db)
+		return
+	}
+	if opts.GetUsers {
+		cli.ShowUsers(db)
+		return
+	}
+	if opts.AddUser {
+		cli.AddUser(db, opts.UserName, opts.UserImage)
+		return
+	}
+	if opts.AddAction {
+		cli.AddAction(db, opts.ActionDesc)
+		return
+	}
+	if opts.DeleteUser {
+		cli.DeleteUser(db, opts.UserName)
+	}
+	if opts.DeleteAction {
+		cli.DeleteAction(db, opts.ActionDesc)
 	}
 
 	// Choose an action if there none

@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/think-it-labs/actionizer/models"
+	"github.com/syd7/actionizer/models"
 	"github.com/think-it-labs/actionizer/utils"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -145,9 +145,33 @@ func (db *Database) InsertUser(u models.User) error {
 	return nil
 }
 
+func (db *Database) DeleteUser(name string) error {
+
+	err := db.ucol().Remove(
+		bson.M{
+			"fullname": name,
+		})
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func (db *Database) InsertAction(a models.Action) error {
 	acol := db.acol()
 	err := acol.Insert(&a)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (db *Database) DeleteAction(description string) error {
+
+	err := db.acol().Remove(
+		bson.M{
+			"description": description,
+		})
 	if err != nil {
 		return err
 	}
