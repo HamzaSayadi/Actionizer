@@ -5,8 +5,8 @@ import (
 
 	"gopkg.in/mgo.v2/bson"
 
-	"github.com/syd7/actionizer/database"
-	"github.com/syd7/actionizer/models"
+	"github.com/think-it-labs/actionizer/database"
+	"github.com/think-it-labs/actionizer/models"
 )
 
 func ShowActions(ms *database.Database) {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/syd7/actionizer/database"
+	"github.com/think-it-labs/actionizer/database"
 )
 
 func getCurrentTask(db *database.Database) http.HandlerFunc {

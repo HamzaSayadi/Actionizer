@@ -7,11 +7,11 @@ import (
 
 	flags "github.com/jessevdk/go-flags"
 	"github.com/knadh/jsonconfig"
-	"github.com/syd7/actionizer/cli"
-	"github.com/syd7/actionizer/database"
-	"github.com/syd7/actionizer/models"
-	"github.com/syd7/actionizer/server"
-	"github.com/syd7/actionizer/utils"
+	"github.com/think-it-labs/actionizer/cli"
+	"github.com/think-it-labs/actionizer/database"
+	"github.com/think-it-labs/actionizer/models"
+	"github.com/think-it-labs/actionizer/server"
+	"github.com/think-it-labs/actionizer/utils"
 )
 
 type configuration struct {
